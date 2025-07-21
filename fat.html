@@ -7,6 +7,8 @@
     <title>NYP BADMINTON</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
@@ -28,11 +30,6 @@
 
         .navbar-nav .nav-link:hover {
             color: #ffc107 !important;
-        }
-
-        /* Header styling */
-        header {
-            background: linear-gradient(to right, #0d6efd, #00bcd4);
         }
 
         /* Card hover effect */
@@ -83,10 +80,6 @@
         }
 
         /* Footer enhancements */
-        footer {
-            position: relative;
-        }
-
         footer::before {
             content: '';
             position: absolute;
@@ -113,13 +106,15 @@
                     <li class="nav-item"><a class="nav-link" href="#history">History</a></li>
                     <li class="nav-item"><a class="nav-link" href="#awards">Awards</a></li>
                     <li class="nav-item"><a class="nav-link" href="#members">Members</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#training">Training</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#signup">Join Us</a></li>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Header Banner -->
-    <header class="text-white text-center py-5">
+    <header class="text-white text-center py-5" style="background: linear-gradient(to right, #0d6efd, #00bcd4);">
         <div class="container">
             <h1 class="display-4 fw-bold">NYP BADMINTON</h1>
             <p class="lead">Excellence, Teamwork, Passion</p>
@@ -195,8 +190,64 @@
         </div>
     </section>
 
+    <!-- Training Dates Section -->
+    <section id="training" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-4">Training Schedule</h2>
+            <ul class="list-group">
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Monday & Wednesday
+                    <span class="badge bg-primary rounded-pill">3:00 PM - 6:00 PM</span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    Saturday (Weekend Sessions)
+                    <span class="badge bg-primary rounded-pill">9:00 AM - 12:00 PM</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Sign Up Form -->
+    <section id="signup" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-4">Join Our Club</h2>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <form>
+                        <div class="mb-3">
+                            <label for="fullName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="fullName" placeholder="Enter your full name"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" class="form-control" id="email" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number"
+                                required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="interest" class="form-label">What are you interested in?</label>
+                            <select class="form-select" id="interest">
+                                <option selected>Select one</option>
+                                <option value="player">Player</option>
+                                <option value="coach">Coach</option>
+                                <option value="supporter">Supporter</option>
+                            </select>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-custom">Submit Application</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-4">
+    <footer class="bg-dark text-white text-center py-4 position-relative">
         <div class="container">
             <p class="mb-0">&copy; 2025 NYP BADMINTON. All rights reserved.</p>
         </div>
