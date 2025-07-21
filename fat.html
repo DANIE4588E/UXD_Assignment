@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>NYP BADMINTON</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+            scroll-behavior: smooth;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .section-title {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #343a40;
+        }
+
+        /* Navbar enhancements */
+        .navbar-nav .nav-link {
+            transition: color 0.3s ease;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #ffc107 !important;
+        }
+
+        /* Header styling */
+        header {
+            background: linear-gradient(to right, #0d6efd, #00bcd4);
+        }
+
+        /* Card hover effect */
+        .card {
+            border: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            transition: transform 0.5s ease;
+        }
+
+        .card:hover img {
+            transform: scale(1.1);
+        }
+
+        /* Awards list styling */
+        .list-group-item {
+            background-color: transparent;
+            border-left: 0;
+            border-right: 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .list-group-item:hover {
+            background-color: #e9ecef;
+        }
+
+        /* Custom button style in footer */
+        .btn-custom {
+            background-color: #ffc107;
+            border: none;
+            color: #000;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .btn-custom:hover {
+            background-color: #e0a800;
+            transform: scale(1.05);
+        }
+
+        /* Footer enhancements */
+        footer {
+            position: relative;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(to right, #0d6efd, #00bcd4);
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">NYP BADMINTON</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#history">History</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#awards">Awards</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#members">Members</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header Banner -->
+    <header class="text-white text-center py-5">
+        <div class="container">
+            <h1 class="display-4 fw-bold">NYP BADMINTON</h1>
+            <p class="lead">Excellence, Teamwork, Passion</p>
+            <a href="#members" class="btn btn-custom mt-3">Meet the Team</a>
+        </div>
+    </header>
+
+    <!-- History Section -->
+    <section id="history" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center">Our History</h2>
+            <p class="text-center">
+                The NYP Badminton CCA was established in [Year] with the aim of nurturing talent and fostering a passion
+                for badminton.
+                Over the years, we have grown from a small group of enthusiasts into a competitive team known across
+                institutions.
+                Our journey has been marked by dedication, hard work, and an unwavering commitment to excellence.
+            </p>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center">Our Achievements</h2>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-trophy-fill me-3 text-warning"></i> [Year] - [Award Description]
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-trophy-fill me-3 text-warning"></i> [Year] - [Award Description]
+                </li>
+                <li class="list-group-item d-flex align-items-center">
+                    <i class="bi bi-trophy-fill me-3 text-warning"></i> [Year] - [Award Description]
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Members Section -->
+    <section id="members" class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-4">Meet Our Members</h2>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="member1.jpg" class="card-img-top" alt="Member 1">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">John Doe</h5>
+                            <p class="card-text text-muted">Captain | Doubles Specialist</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="member2.jpg" class="card-img-top" alt="Member 2">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Jane Smith</h5>
+                            <p class="card-text text-muted">Vice Captain | Singles Player</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card shadow-sm">
+                        <img src="member3.jpg" class="card-img-top" alt="Member 3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Alex Johnson</h5>
+                            <p class="card-text text-muted">Coach | Strategy Expert</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <p class="mb-0">&copy; 2025 NYP BADMINTON. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
