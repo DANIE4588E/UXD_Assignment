@@ -32,6 +32,7 @@ header {
 .bi:hover {
     color: #0A4B65;
     background-color: white;
+
 }
 
 /* brand */
@@ -66,10 +67,13 @@ header {
     padding: .75rem 0;
 }
 
+/* Link Effects */
 .nav-links a:hover {
-    background-color: #f4f4f4;
-    transform: translateY(-5px);
-
+    color: #0A4B65 !important;
+    background-color: #ffffff;
+    border-radius: 10px;
+    height: 90%;
+    transform: translateY(-2px);
 }
 
 .nav-links a:hover::after {
