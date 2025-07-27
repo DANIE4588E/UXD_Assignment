@@ -26,6 +26,18 @@
             .then(r => r.text())
             .then(html => {
                 document.getElementById('header-placeholder').innerHTML = html;
+
+                const currentPath = window.location.pathname.split("/").pop();
+                const links = document.querySelectorAll('#header-placeholder a');
+
+                links.forEach(link => {
+                    const linkPath = link.getAttribute('href');
+                    if (linkPath === currentPath || (linkPath === 'index.html' && currentPath === '')) {
+                        link.classList.add('active');
+                    } else {
+                        link.classList.remove('active');
+                    }
+                });
             });
     </script>
 </body>

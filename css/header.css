@@ -71,7 +71,18 @@ img {
     padding: .75rem 0;
 }
 
-/* Link Effects */
+.nav-links a.active {
+    color: rgba(255, 255, 255, 0.6) !important;
+}
+
+.nav-links a.active:hover {
+    color: rgba(255, 255, 255, 0.6) !important;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 0px;
+    height: 90%;
+    transform: translateY(-2px);
+}
+
 .nav-links a:hover {
     color: #0A4B65 !important;
     background-color: #ffffff;
