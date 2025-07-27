@@ -6,6 +6,12 @@ body {
 
 footer {
     min-height: 50px;
+    display: block;
+    width: 100%;
+    margin: 0 auto
+    
+
+    
 }
 body {
     display: flex;
@@ -13,4 +19,10 @@ body {
 }
 main {
     flex: 1;
+}
+#footer-links { 
+    text-align: center !important;
+}
+#social-media-links {
+    text-align: center;
 }
