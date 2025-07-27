@@ -32,7 +32,6 @@ header {
 .bi:hover {
     color: #0A4B65;
     background-color: white;
-
 }
 
 /* brand */
@@ -47,6 +46,10 @@ header {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     text-decoration: none;
+}
+
+img {
+    padding-left: 20px;
 }
 
 /* shared nav-links */
@@ -102,6 +105,7 @@ header {
 .navbar-toggler {
     border: none;
     box-shadow: none;
+    padding-right: 30px;
 }
 
 .navbar-toggler:focus,
