@@ -1,55 +1,39 @@
-<!-- header.html -->
-<!DOCTYPE html>
-<html lang="en">
+<header>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top p-0">
+        <div class="container-fluid px-0 top-bar">
+            <!-- logo -->
+            <a href="index.html#home" class="logo ps-3">
+                <img src="Resources/Badminton Logo.png" height="30" class="me-2" alt="Logo" />
+                NYP Badminton
+            </a>
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Events</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
-    <link href="css/header.css" rel="stylesheet" />
-</head>
+            <!-- hamburger toggler -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenuMobile"
+                aria-controls="mainMenuMobile" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="bi bi-list fs-1"></i>
+            </button>
 
-<body>
-
-    <header>
-        <nav class="navbar navbar-expand-md navbar-light fixed-top p-0">
-            <div class="container-fluid px-0 top-bar">
-                <a href="index.html#home" class="logo ps-3">
-                    <img src="Resources/Badminton Logo.png" height="30" class="me-2" alt="Logo" />
-                    NYP Badminton
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenuMobile"
-                    aria-controls="mainMenuMobile" aria-expanded="false" aria-label="Toggle navigation">
-                    <i class="bi bi-list fs-1"></i>
-                </button>
-                <!-- desktop‑only menu -->
-                <div class="collapse navbar-collapse d-none d-md-flex" id="mainMenuDesktop">
-                    <ul class="navbar-nav ms-auto nav-links">
-                        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-                        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
-                        <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-                    </ul>
-                </div>
+            <!-- desktop menu -->
+            <div class="collapse navbar-collapse d-none d-md-flex" id="mainMenuDesktop">
+                <ul class="navbar-nav ms-auto nav-links">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
             </div>
-        </nav>
-    </header>
 
-    <!-- mobile‑only menu (outside header) -->
-    <div class="collapse d-md-none" id="mainMenuMobile">
-        <ul class="navbar-nav bg-white p-3 shadow nav-links">
-            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-            <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
-            <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
-        </ul>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-
-</html>
+            <!-- mobile menu -->
+            <div class="collapse d-md-none" id="mainMenuMobile">
+                <ul class="navbar-nav bg-white p-3 shadow nav-links">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>

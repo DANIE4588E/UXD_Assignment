@@ -5,25 +5,41 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Home</title>
+
+    <!-- CSS: only once each -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
     <link href="css/styles.css" rel="stylesheet" />
     <link href="css/home.css" rel="stylesheet" />
+    <link href="css/header.css" rel="stylesheet" />
 </head>
 
 <body style="margin:0; display:flex; flex-direction:column; height:100vh;">
+    <div id="header-placeholder" style="flex:0 0 auto; height:70px;"></div>
 
-    <div id="header-placeholder" style="flex:0 0 auto;"></div>
-
-    <main style="flex:1; margin:0;">
-        <iframe src="https://emb.fouita.com/widget/0x2b2684/ft3fbziqp" title="Instagram Hashtag Feed"
-            class="d-block mx-auto" style="width:100%; max-width:1000px; height:100%; border:0;"></iframe>
-    </main>
+    <div id="ft-insta-app"
+        style="flex:1; width:100%; max-width:1000px; margin:0 auto; position:relative; overflow:visible;"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         fetch('header.html')
             .then(r => r.text())
-            .then(html => document.getElementById('header-placeholder').innerHTML = html);
+            .then(html => {
+                document.getElementById('header-placeholder').innerHTML = html;
+            });
+    </script>
+
+    <script>
+        const container = document.getElementById('ft-insta-app');
+        if (!container.querySelector('#ft3fbziqp')) {
+            const newDiv = document.createElement('div');
+            newDiv.id = 'ft3fbziqp';
+            newDiv.className = 'ft';
+            const newScript = document.createElement('script');
+            newScript.src = 'https://wdg.fouita.com/widgets/0x2b2684.js';
+            newDiv.appendChild(newScript);
+            container.appendChild(newDiv);
+        }
     </script>
 </body>
 
