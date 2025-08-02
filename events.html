@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
     <link href="css/header.css" rel="stylesheet" />
     <link href="css/footer.css" rel="stylesheet" />
 </head>
+
 <body style="margin:0; display:flex; flex-direction:column; height:100vh;">
     <div id="header-placeholder" style="flex:0 0 auto; height:70px;"></div>
 
@@ -32,6 +34,7 @@
                     const linkPath = link.getAttribute('href');
                     if (linkPath === currentPath || (linkPath === 'index.html' && currentPath === '')) {
                         link.classList.add('active');
+                        link.addEventListener('click', e => e.preventDefault());
                     } else {
                         link.classList.remove('active');
                     }
@@ -46,4 +49,5 @@
             });
     </script>
 </body>
+
 </html>

@@ -79,6 +79,7 @@
                     const linkPath = link.getAttribute('href');
                     if (linkPath === currentPath || (linkPath === 'home.html' && currentPath === '')) {
                         link.classList.add('active');
+                        link.addEventListener('click', e => e.preventDefault());
                     } else {
                         link.classList.remove('active');
                     }
