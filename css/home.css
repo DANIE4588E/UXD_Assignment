@@ -1,0 +1,67 @@
+@font-face {
+    font-family: 'Freshman';
+    src: url('../fonts/freshman/Freshman.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Varela';
+    src: url('../fonts/varela/Varela-Regular.ttf') format('truetype');
+}
+
+.title {
+    font-family: 'Freshman', sans-serif;
+}
+
+.lead {
+    font-family: 'Varela', sans-serif;
+    color: #0A4B65;
+}
+
+.btn-primary {
+    background-color: white;
+    border: #0A4B65 solid 2px;
+    color: #0A4B65;
+    padding: 10px 20px;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+    transform-origin: center;
+}
+
+.btn-primary:hover {
+    background-color: #0A4B65;
+    color: white;
+    border-color: #0A4B65;
+
+    transform: scale(1.05);
+}
+
+.btn-secondary {
+    background-color: #0A4B65;
+    color: white;
+    border-color: white;
+
+    padding: 10px 20px;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+    transform-origin: center;
+}
+
+.btn-secondary:hover {
+    background-color: white;
+    border: #0A4B65 solid 2px;
+    color: #0A4B65;
+
+    transform: scale(1.05);
+}
+
+.img-fluid {
+    border-radius: 20px;
+}
