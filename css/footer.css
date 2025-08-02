@@ -1,28 +1,28 @@
 body {
-    min-height:100vh;
-    margin:0;
+    min-height: 100vh;
+    margin: 0;
 }
-
 
 footer {
     min-height: 50px;
     display: block;
     width: 100%;
-    margin: 0 auto
-    
-
-    
+    margin: 0 auto;
 }
+
 body {
     display: flex;
     flex-direction: column;
 }
+
 main {
     flex: 1;
 }
-#footer-links { 
+
+#footer-links {
     text-align: center !important;
 }
+
 #social-media-links {
     text-align: center;
 }
