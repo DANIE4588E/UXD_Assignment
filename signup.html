@@ -12,16 +12,55 @@
     <link href="css/about.css" rel="stylesheet" />
     <link href="css/header.css" rel="stylesheet" />
     <link href="css/footer.css" rel="stylesheet" />
-    <style>
-
-    </style>
+    <link href="css/signup.css" rel="stylesheet" />
+    
 </head>
 
 <body style="margin:0; display:flex; flex-direction:column; height:100vh;">
     <div id="header-placeholder" style="flex:0 0 auto; height:70px;"></div>
     
     <main>
-        Sign Up NOW!!!!!
+        <div class="container-fluid">
+        <div class="row justify-content-center align-items-center ">
+            <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-5"> <!-- for all screen sizes -->
+                <div class="form-container">
+                    <h2 class="form-title" >Join Our Community!</h2>
+                    
+                    <form class="join-form" id="myForm">
+                        <div class="mb-3">
+                            <input type="text" class="form-control form-control-md" placeholder="Your Name" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <input type="email" class="form-control form-control-md" placeholder="NYP Email Address" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <input type="tel" class="form-control form-control-md" placeholder="Phone Number" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <select class="form-select form-select-md" id="select" required >
+                                <option value="">Experience Level</option>
+                                <option value="beginner">Beginner</option>
+                                <option value="intermediate">Intermediate</option>
+                                <option value="advanced">Advanced</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-4">
+                            <textarea class="form-control" rows="5" id="comment" 
+                                placeholder="Tell us about yourself and why you want to join!" required></textarea>
+                        </div>
+                        
+                        <div class="d-grid">
+                            <button class="btn btn-submit btn-lg" type="submit" id = "submitapp">Submit Application</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
         
     </main>
     <div id="footer-placeholder" style="flex:0 0 auto;"></div>
