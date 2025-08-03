@@ -1,3 +1,26 @@
 .theme-text {
     color: #0A4B65;
 }
+
+.btn-primary {
+    background-color: #0A4B65;
+    color: white;
+    border-color: white;
+
+    padding: 10px 20px;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+    transform-origin: center;
+}
+
+.btn-primary:hover {
+    background-color: white;
+    border: #0A4B65 solid 2px;
+    color: #0A4B65;
+
+    transform: scale(1.05);
+}
