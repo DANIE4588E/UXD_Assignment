@@ -3,12 +3,11 @@
 }
 
 .btn-primary {
+    display: inline-block;
     background-color: #0A4B65;
     color: white;
-    border-color: white;
-
+    border: 2px solid white;
     padding: 10px 20px;
-
     transition:
         transform 0.2s ease,
         background-color 0.2s ease,
@@ -19,8 +18,14 @@
 
 .btn-primary:hover {
     background-color: white;
-    border: #0A4B65 solid 2px;
     color: #0A4B65;
+    border-color: #0A4B65;
+    transform: scale(1.1);
+}
 
-    transform: scale(1.05);
+.btn-primary:active {
+    background-color: rgb(158, 158, 158) !important;
+    color: #0A4B65 !important;
+    border-color: #0A4B65 !important;
+    transform: scale(0.9);
 }
