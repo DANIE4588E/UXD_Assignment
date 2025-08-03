@@ -14,6 +14,23 @@
     <link href="css/footer.css" rel="stylesheet" />
     <link href="css/signup.css" rel="stylesheet" />
 
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore-compat.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZVoZMsL5tRMKlR3Y2m68PCilZqOiLYdw",
+            authDomain: "ux-assignment.firebaseapp.com",
+            projectId: "ux-assignment",
+            storageBucket: "ux-assignment.appspot.com",
+            messagingSenderId: "695373901468",
+            appId: "1:695373901468:web:942d3bfb6d8b17f2fe8759",
+            measurementId: "G-Q13N4V4F26"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+    </script>
+
 </head>
 
 <body style="margin:0; display:flex; flex-direction:column; height:100vh;">
@@ -27,16 +44,18 @@
 
                     <form class="join-form" id="myForm">
                         <div class="mb-3">
-                            <input type="text" class="form-control form-control-md" placeholder="Your Name" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <input type="email" class="form-control form-control-md" placeholder="NYP Email Address"
+                            <input type="text" class="form-control form-control-md" placeholder="Your Name" id="name"
                                 required>
                         </div>
 
                         <div class="mb-3">
-                            <input type="tel" class="form-control form-control-md" placeholder="Phone Number" required>
+                            <input type="email" class="form-control form-control-md" placeholder="NYP Email Address"
+                                id="email" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <input type="tel" class="form-control form-control-md" placeholder="Phone Number" id="phone"
+                                required>
                         </div>
 
                         <div class="mb-3">
@@ -85,6 +104,50 @@
                     }
                 });
             });
+    </script>
+
+    <!-- Firebase -->
+    <script>
+        const form = document.getElementById('myForm');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value;
+            const experience = document.getElementById('select').value;
+            const comment = document.getElementById('comment').value;
+
+            // Validate email format
+            const emailRegex = /^(\d{6}[a-z])@mymail\.nyp\.edu\.sg$/i;
+            const match = email.match(emailRegex);
+
+            if (!match) {
+                alert("Please enter a valid NYP email (e.g. 123456a@mymail.nyp.edu.sg).");
+                return;
+            }
+
+            const studentId = match[1].toLowerCase();
+
+            try {
+                await db.collection("applications").doc(studentId).set({
+                    name,
+                    studentId,
+                    email,
+                    phone,
+                    experience,
+                    comment,
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                alert("Application submitted successfully!");
+                form.reset();
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("Submission failed. Please try again.");
+            }
+        });
     </script>
 </body>
 

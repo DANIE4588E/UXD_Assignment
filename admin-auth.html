@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login</n>
+    </title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/admin-auth.css" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+
+    <!-- Firebase SDK (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyDZVoZMsL5tRMKlR3Y2m68PCilZqOiLYdw",
+            authDomain: "ux-assignment.firebaseapp.com",
+            projectId: "ux-assignment",
+            storageBucket: "ux-assignment.appspot.com",
+            messagingSenderId: "695373901468",
+            appId: "1:695373901468:web:942d3bfb6d8b17f2fe8759",
+            measurementId: "G-Q13N4V4F26"
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+
+        // Redirect if already logged in
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                window.location.href = 'admin-dashboard.html';
+            }
+        });
+    </script>
+</head>
+
+<body style="margin:0; display:flex; flex-direction:column; height:100vh;">
+    <div id="header-placeholder" style="flex:0 0 auto; height:70px;"></div>
+
+    <main class="container d-flex justify-content-center align-items-center py-5">
+        <div class="w-100" style="max-width: 400px;">
+            <h1 class="text-center mb-5" style="color: #0A4B65;">Admin Portal</h1>
+            <form id="login-form">
+                <div class="mb-3">
+                    <label for="login-email" class="form-label">Email</label>
+                    <input type="email" id="login-email" class="form-control" placeholder="admin@example.com"
+                        required />
+                </div>
+                <div class="mb-4">
+                    <label for="login-password" class="form-label">Password</label>
+                    <input type="password" id="login-password" class="form-control" placeholder="••••••••" required />
+                </div>
+                <button type="submit" class="btn btn-primary w-100 mt-3">Login</button>
+            </form>
+        </div>
+    </main>
+    <div id="footer-placeholder" style="flex:0 0 auto;"></div>
+
+    <!-- Firebase Auth Handlers -->
+
+    <script>
+        document.getElementById('login-form').addEventListener('submit', e => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            auth.signInWithEmailAndPassword(email, password)
+                .catch(err => alert(err.message));
+        });
+    </script>
+
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

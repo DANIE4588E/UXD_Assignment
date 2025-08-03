@@ -1,0 +1,28 @@
+.btn-primary {
+    background-color: white !important;
+    border: #0A4B65 solid 2px !important;
+    color: #0A4B65 !important;
+    padding: 10px 20px;
+
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease !important;
+    transform-origin: center;
+}
+
+.btn-primary:hover {
+    background-color: #0A4B65 !important;
+    color: white !important;
+    border-color: #0A4B65 !important;
+
+    transform: scale(1.05);
+}
+
+.btn-primary:active {
+    background-color: #083c50 !important;
+    color: rgb(158, 158, 158) !important;
+    border-color: #0A4B65 !important;
+    transform: scale(0.9);
+}
