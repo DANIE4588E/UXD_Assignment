@@ -14,6 +14,13 @@
     <link href="css/footer.css" rel="stylesheet" />
     <link href="css/signup.css" rel="stylesheet" />
 
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+        (function () {
+            emailjs.init("7iVlo704-t1FVEKkZ");
+        })();
+    </script>
+
     <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore-compat.js"></script>
     <script>
@@ -106,13 +113,12 @@
             });
     </script>
 
-    <!-- Firebase -->
     <script>
         const form = document.getElementById('myForm');
         const submitBtn = document.getElementById('submitapp');
-        const originalBtnHTML = submitBtn.innerHTML;
+        const originalBtn = submitBtn.innerHTML;
 
-        form.addEventListener('submit', async (e) => {
+        form.addEventListener('submit', async e => {
             e.preventDefault();
 
             const name = document.getElementById('name').value.trim();
@@ -121,22 +127,21 @@
             const experience = document.getElementById('select').value;
             const comment = document.getElementById('comment').value.trim();
 
-            const emailRegex = /^(\d{6}[a-z])@mymail\.nyp\.edu\.sg$/i;
-            const match = email.match(emailRegex);
-            if (!match) {
+            // Validate & extract studentId
+            const m = email.match(/^(\d{6}[a-z])@mymail\.nyp\.edu\.sg$/i);
+            if (!m) {
                 alert("Please enter a valid NYP email (e.g. 123456a@mymail.nyp.edu.sg).");
                 return;
             }
-            const studentId = match[1].toLowerCase();
+            const studentId = m[1].toLowerCase();
 
-            // Show spinner & disable button
+            // Show spinner
             submitBtn.disabled = true;
             submitBtn.innerHTML =
-                '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Submitting…';
+                '<span class="spinner-border spinner-border-sm me-2" role="status"></span>Submitting…';
 
             try {
-                await db
-                    .collection("applications")
+                await db.collection("applications")
                     .doc(studentId)
                     .set({
                         name,
@@ -148,18 +153,30 @@
                         timestamp: firebase.firestore.FieldValue.serverTimestamp()
                     });
 
-                alert("Application submitted successfully!");
+                await emailjs.send(
+                    "service_sw6tcja",
+                    "template_8a20wsq",
+                    {
+                        to_name: name,
+                        to_email: email,
+                        student_id: studentId,
+                        message: `Your application was successfully submitted!`
+                    }
+                );
+
+                alert("Application submitted and confirmation email sent!");
                 form.reset();
-            } catch (error) {
-                console.error("Error adding document:", error);
+            } catch (err) {
+                console.error(err);
                 alert("Submission failed. Please try again.");
             } finally {
                 // Restore button
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = originalBtnHTML;
+                submitBtn.innerHTML = originalBtn;
             }
         });
     </script>
+
 </body>
 
 </html>
