@@ -108,23 +108,19 @@
 
     <!-- Firebase -->
     <script>
-        // 2. Grab form & button references
         const form = document.getElementById('myForm');
         const submitBtn = document.getElementById('submitapp');
         const originalBtnHTML = submitBtn.innerHTML;
 
-        // 3. Submit listener
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            // Collect values
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const phone = document.getElementById('phone').value.trim();
             const experience = document.getElementById('select').value;
             const comment = document.getElementById('comment').value.trim();
 
-            // Validate NYP email & extract studentId
             const emailRegex = /^(\d{6}[a-z])@mymail\.nyp\.edu\.sg$/i;
             const match = email.match(emailRegex);
             if (!match) {
@@ -139,7 +135,6 @@
                 '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Submitting…';
 
             try {
-                // Write to Firestore
                 await db
                     .collection("applications")
                     .doc(studentId)
