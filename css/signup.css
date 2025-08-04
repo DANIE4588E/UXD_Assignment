@@ -1,61 +1,84 @@
 .form-container {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(240, 240, 240, 0.2);
-            border-radius: 20px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            padding: 32px;
-            margin: 32px auto;
-            max-width: 600px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(240, 240, 240, 0.2);
+    border-radius: 20px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    padding: 32px;
+    margin: 32px auto;
+    max-width: 600px;
 }
+
 .form-title {
-            text-align: center;
-            margin-bottom: 24px;
-            
-            
-        }
+    text-align: center;
+    margin-bottom: 24px;
+
+
+}
+
 @media (max-width: 576px) {
-            .form-container {
-                margin: 1rem;
-                padding: 1.5rem;
-                border-radius: 15px;
-            }
-            
-            .form-control, .form-select {
-                padding: 12px;
-            }
-            
-            .btn-submit {
-                padding: 12px 25px;
-            }
-        }
-        
+    .form-container {
+        margin: 1rem;
+        padding: 1.5rem;
+        border-radius: 15px;
+    }
+
+    .form-control,
+    .form-select {
+        padding: 12px;
+    }
+
+    .btn-submit {
+        padding: 12px 25px;
+    }
+}
+
 @media (max-width: 480px) {
     .form-container {
         padding: 1rem;
-        }
-                    
-.form-title {
-    font-size: 1.5rem;
-    margin-bottom: 1.5rem;
+    }
+
+    .form-title {
+        font-size: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
 }
-}
-.btn-submit{
+
+.btn-submit {
     background-color: #0A4B65;
-    color:white;
-    border: none;
+    color: white;
+    border: 2px solid #0A4B65;
     border-radius: 10px;
     padding: 15px 30px;
-    transition: color .3s, transform .3s;
-    
+    transition:
+        transform 0.2s ease,
+        background-color 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    transform-origin: center;
+
 }
-.btn-submit:hover{
-    background-color: #0A4B65;
-    color: #ffffff;
-    transform: translateY(-2px);
+
+.btn-submit:hover {
+    background-color: #ffffff;
+    color: #0A4B65;
+    border-color: #0A4B65;
+    transform: translateY(-5px);
+    box-shadow: 0px 5px;
 }
-.form-control, .form-select {
+
+.btn-submit:active {
+    background-color: #b7b7b7 !important;
+    color: #0A4B65 !important;
+    transform: translateY(5px);
+    box-shadow: 0px 0px;
+}
+
+.form-control,
+.form-select {
     border: 1px solid rgba(0, 0, 0, 0.3);
 }
+
 .form-control::placeholder {
     color: rgba(51, 51, 51, 0.7);
 }

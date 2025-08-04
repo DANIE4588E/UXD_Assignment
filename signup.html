@@ -108,44 +108,60 @@
 
     <!-- Firebase -->
     <script>
+        // 2. Grab form & button references
         const form = document.getElementById('myForm');
+        const submitBtn = document.getElementById('submitapp');
+        const originalBtnHTML = submitBtn.innerHTML;
 
+        // 3. Submit listener
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
 
-            const name = document.getElementById('name').value;
+            // Collect values
+            const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
-            const phone = document.getElementById('phone').value;
+            const phone = document.getElementById('phone').value.trim();
             const experience = document.getElementById('select').value;
-            const comment = document.getElementById('comment').value;
+            const comment = document.getElementById('comment').value.trim();
 
-            // Validate email format
+            // Validate NYP email & extract studentId
             const emailRegex = /^(\d{6}[a-z])@mymail\.nyp\.edu\.sg$/i;
             const match = email.match(emailRegex);
-
             if (!match) {
                 alert("Please enter a valid NYP email (e.g. 123456a@mymail.nyp.edu.sg).");
                 return;
             }
-
             const studentId = match[1].toLowerCase();
 
+            // Show spinner & disable button
+            submitBtn.disabled = true;
+            submitBtn.innerHTML =
+                '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Submitting…';
+
             try {
-                await db.collection("applications").doc(studentId).set({
-                    name,
-                    studentId,
-                    email,
-                    phone,
-                    experience,
-                    comment,
-                    timestamp: firebase.firestore.FieldValue.serverTimestamp()
-                });
+                // Write to Firestore
+                await db
+                    .collection("applications")
+                    .doc(studentId)
+                    .set({
+                        name,
+                        studentId,
+                        email,
+                        phone,
+                        experience,
+                        comment,
+                        timestamp: firebase.firestore.FieldValue.serverTimestamp()
+                    });
 
                 alert("Application submitted successfully!");
                 form.reset();
             } catch (error) {
-                console.error("Error adding document: ", error);
+                console.error("Error adding document:", error);
                 alert("Submission failed. Please try again.");
+            } finally {
+                // Restore button
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalBtnHTML;
             }
         });
     </script>
