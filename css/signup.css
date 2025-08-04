@@ -70,7 +70,7 @@
 .btn-submit:active {
     background-color: #b7b7b7 !important;
     color: #0A4B65 !important;
-    transform: translateY(5px);
+    transform: translateY(0px);
     box-shadow: 0px 0px;
 }
 
