@@ -5,16 +5,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
-    <!-- Bootstrap CSS -->
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-    <!-- Firebase SDK (compat) -->
     <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.5.0/firebase-firestore-compat.js"></script>
 
     <script>
-        // TODO: Ensure this file is named 'admin-dashboard.html' and served alongside 'admin-auth.html'
         const firebaseConfig = {
             apiKey: "AIzaSyDZVoZMsL5tRMKlR3Y2m68PCilZqOiLYdw",
             authDomain: "ux-assignment.firebaseapp.com",
@@ -24,11 +22,11 @@
             appId: "1:695373901468:web:942d3bfb6d8b17f2fe8759",
             measurementId: "G-Q13N4V4F26"
         };
+
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Protect the page: check auth status once
         const unsubscribe = auth.onAuthStateChanged(user => {
             unsubscribe();
             if (!user) {
@@ -36,8 +34,14 @@
             }
         });
 
-        // Fetch and render applications after DOM loads
+        function logout() {
+            auth.signOut().then(() => {
+                window.location.href = './admin-auth.html';
+            });
+        }
+
         window.addEventListener('DOMContentLoaded', async () => {
+            // Load application data
             const tableBody = document.getElementById('applications-body');
             try {
                 const snapshot = await db.collection('applications').orderBy('timestamp', 'desc').get();
@@ -58,14 +62,39 @@
             } catch (err) {
                 console.error('Error loading applications', err);
             }
-        });
 
-        // Logout handler
-        function logout() {
-            auth.signOut().then(() => {
-                window.location.href = './admin-auth.html';
+            // Event form submission
+            const eventForm = document.getElementById('event-form');
+            eventForm.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                const title = document.getElementById('event-title').value.trim();
+                const description = document.getElementById('event-description').value.trim();
+                const location = document.getElementById('event-location').value.trim();
+                const startTime = new Date(document.getElementById('event-start').value);
+                const endTime = new Date(document.getElementById('event-end').value);
+                const lat = parseFloat(document.getElementById('event-lat').value);
+                const lng = parseFloat(document.getElementById('event-lng').value);
+                const geo = new firebase.firestore.GeoPoint(lat, lng);
+
+                try {
+                    await db.collection('events').add({
+                        title,
+                        description,
+                        location,
+                        startTime: firebase.firestore.Timestamp.fromDate(startTime),
+                        endTime: firebase.firestore.Timestamp.fromDate(endTime),
+                        geo,
+                        createdAt: firebase.firestore.Timestamp.now()
+                    });
+                    alert('Event added successfully!');
+                    eventForm.reset();
+                } catch (err) {
+                    console.error('Error adding event:', err);
+                    alert('Failed to add event.');
+                }
             });
-        }
+        });
     </script>
 </head>
 
@@ -88,10 +117,43 @@
                     <th>Submitted At</th>
                 </tr>
             </thead>
-            <tbody id="applications-body">
-                <!-- Rows inserted here -->
-            </tbody>
+            <tbody id="applications-body"></tbody>
         </table>
+
+        <hr class="my-5">
+
+        <h2>Add New Event</h2>
+        <form id="event-form" class="mb-5">
+            <div class="mb-3">
+                <label for="event-title" class="form-label">Event Title</label>
+                <input type="text" class="form-control" id="event-title" required>
+            </div>
+            <div class="mb-3">
+                <label for="event-description" class="form-label">Description</label>
+                <textarea class="form-control" id="event-description" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="event-location" class="form-label">Location</label>
+                <input type="text" class="form-control" id="event-location" required>
+            </div>
+            <div class="mb-3">
+                <label for="event-lat" class="form-label">Latitude</label>
+                <input type="number" step="any" class="form-control" id="event-lat" required>
+            </div>
+            <div class="mb-3">
+                <label for="event-lng" class="form-label">Longitude</label>
+                <input type="number" step="any" class="form-control" id="event-lng" required>
+            </div>
+            <div class="mb-3">
+                <label for="event-start" class="form-label">Start Time</label>
+                <input type="datetime-local" class="form-control" id="event-start" required>
+            </div>
+            <div class="mb-3">
+                <label for="event-end" class="form-label">End Time</label>
+                <input type="datetime-local" class="form-control" id="event-end" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Add Event</button>
+        </form>
     </div>
 </body>
 
