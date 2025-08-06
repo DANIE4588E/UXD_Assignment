@@ -1,34 +1,28 @@
 fetch('header.html')
     .then(r => r.text())
     .then(html => {
-        // Inject header
         document.getElementById('header-placeholder').innerHTML = html;
 
-        // Grab all links in the injected header
         const links = document.querySelectorAll('#header-placeholder a');
 
-        // 1. Normalize the current path into "something.html"
-        //    - strip trailing slash, default "/" → "index.html"
-        let rawPath = window.location.pathname.replace(/\/$/, '');  // "/signup" or ""
+        let rawPath = window.location.pathname.replace(/\/$/, '');
         let currentFile = rawPath
-            ? rawPath.replace(/^\//, '')                                // drop leading slash
+            ? rawPath.replace(/^\//, '')
             : 'index.html';
         if (!currentFile.endsWith('.html')) {
             currentFile += '.html';
         }
 
-        // 2. Loop through each <a> and normalize its href the same way
         links.forEach(link => {
             const url = new URL(link.getAttribute('href'), location.origin);
-            let linkPath = url.pathname.replace(/\/$/, '');            // "/signup" or ""
+            let linkPath = url.pathname.replace(/\/$/, '');
             let linkFile = linkPath
-                ? linkPath.replace(/^\//, '')                            // "signup"
+                ? linkPath.replace(/^\//, '')
                 : 'index.html';
             if (!linkFile.endsWith('.html')) {
                 linkFile += '.html';
             }
 
-            // 3. Compare and toggle "active"
             if (linkFile === currentFile) {
                 link.classList.add('active');
                 link.addEventListener('click', e => e.preventDefault());
@@ -62,4 +56,40 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     els.forEach(el => obs.observe(el));
-}); 
+});
+
+
+// Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyDZVoZMsL5tRMKlR3Y2m68PCilZqOiLYdw",
+    authDomain: "ux-assignment.firebaseapp.com",
+    projectId: "ux-assignment",
+    storageBucket: "ux-assignment.appspot.com",
+    messagingSenderId: "695373901468",
+    appId: "1:695373901468:web:942d3bfb6d8b17f2fe8759",
+    measurementId: "G-Q13N4V4F26"
+};
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+async function fetchAndCacheEvents() {
+    const now = firebase.firestore.Timestamp.now();
+    const snap = await db.collection('events')
+        .where('startTime', '>=', now)
+        .orderBy('startTime', 'asc')
+        .get();
+
+    const events = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+    localStorage.setItem('cachedEvents', JSON.stringify({
+        ts: Date.now(),
+        data: events
+    }));
+    return events;
+}
+
+window.addEventListener('DOMContentLoaded', () => {
+    const item = JSON.parse(localStorage.getItem('cachedEvents') || 'null');
+    if (!item || Date.now() - item.ts > 5 * 60e3) {
+        fetchAndCacheEvents().catch(console.error);
+    }
+});
