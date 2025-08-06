@@ -72,7 +72,7 @@
                 snapshot.forEach(doc => {
                     const { title, description, location, startTime, endTime } = doc.data();
                     const tr = document.createElement('tr');
-                    tr.classList.add('fade-in-element');   // ← add the class here
+                    tr.classList.add('fade-in-element');
                     tr.innerHTML = `
         <td>${title}</td>
         <td>${description}</td>
