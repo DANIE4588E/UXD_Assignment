@@ -3,25 +3,34 @@ fetch('header.html')
     .then(html => {
         document.getElementById('header-placeholder').innerHTML = html;
 
-        // strip trailing slash ("/about/" → "/about"), default "/" → "/index.html"
-        let pathname = window.location.pathname.replace(/\/$/, '') || '/';
-        if (pathname === '/') pathname = '/index.html';
+        // 1. Get raw pathname (e.g. "/signup/" or "/signup.html")
+        let raw = window.location.pathname;
 
-        document
-            .querySelectorAll('#header-placeholder a')
-            .forEach(link => {
-                // make link.href absolute and strip origin
-                let linkPath = new URL(link.href, location.origin).pathname;
-                linkPath = linkPath.replace(/\/$/, '') || '/index.html';
+        // 2. Strip leading & trailing slashes
+        let clean = raw.replace(/^\/|\/$/g, '');  // "signup" or "signup.html" or ""
 
-                if (linkPath === pathname) {
-                    link.classList.add('active');
-                    link.addEventListener('click', e => e.preventDefault());
-                } else {
-                    link.classList.remove('active');
-                }
-            });
+        // 3. Default home to "index.html"
+        if (clean === '') clean = 'index.html';
+
+        // 4. Ensure .html extension
+        const currentFile = clean.endsWith('.html') ? clean : `${clean}.html`;
+
+        // 5. Loop links
+        document.querySelectorAll('#header-placeholder a').forEach(link => {
+            let href = link.getAttribute('href');     // e.g. "signup.html" or "/signup.html"
+            // normalize href too:
+            href = href.replace(/^\/|\/$/g, '');      // strip slashes
+            if (!href.endsWith('.html')) href = `${href}.html`;
+
+            if (href === currentFile) {
+                link.classList.add('active');
+                link.addEventListener('click', e => e.preventDefault());
+            } else {
+                link.classList.remove('active');
+            }
+        });
     });
+
 
 fetch('footer.html')
     .then(r => r.text())
