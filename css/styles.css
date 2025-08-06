@@ -1,3 +1,13 @@
+@font-face {
+    font-family: 'Freshman';
+    src: url('../fonts/freshman/Freshman.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'Varela';
+    src: url('../fonts/varela/Varela-Regular.ttf') format('truetype');
+}
+
 * {
     margin: 0;
     padding: 0;
