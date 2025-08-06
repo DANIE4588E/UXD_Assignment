@@ -6,9 +6,12 @@ fetch('header.html')
         const currentPath = window.location.pathname.split("/").pop();
         const links = document.querySelectorAll('#header-placeholder a');
 
+        const path = window.location.pathname;
+        const page = path.split('/').pop();
+
         links.forEach(link => {
             const linkPath = link.getAttribute('href');
-            if (linkPath === currentPath) {
+            if (linkPath === currentPath || linkPath === page) {
                 link.classList.add('active');
                 link.addEventListener('click', e => e.preventDefault());
             } else {
