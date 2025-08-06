@@ -1,14 +1,13 @@
+// js/script.js
+
 fetch('header.html')
     .then(r => r.text())
     .then(html => {
         document.getElementById('header-placeholder').innerHTML = html;
 
         const links = document.querySelectorAll('#header-placeholder a');
-
         let rawPath = window.location.pathname.replace(/\/$/, '');
-        let currentFile = rawPath
-            ? rawPath.replace(/^\//, '')
-            : 'index.html';
+        let currentFile = rawPath ? rawPath.replace(/^\//, '') : 'index.html';
         if (!currentFile.endsWith('.html')) {
             currentFile += '.html';
         }
@@ -16,9 +15,7 @@ fetch('header.html')
         links.forEach(link => {
             const url = new URL(link.getAttribute('href'), location.origin);
             let linkPath = url.pathname.replace(/\/$/, '');
-            let linkFile = linkPath
-                ? linkPath.replace(/^\//, '')
-                : 'index.html';
+            let linkFile = linkPath ? linkPath.replace(/^\//, '') : 'index.html';
             if (!linkFile.endsWith('.html')) {
                 linkFile += '.html';
             }
@@ -32,8 +29,6 @@ fetch('header.html')
         });
     })
     .catch(err => console.error('Error loading header:', err));
-
-
 
 fetch('footer.html')
     .then(r => r.text())
@@ -54,10 +49,8 @@ document.addEventListener('DOMContentLoaded', () => {
         },
         { threshold: 0.1 }
     );
-
     els.forEach(el => obs.observe(el));
 });
-
 
 // Firebase
 const firebaseConfig = {
@@ -78,7 +71,6 @@ async function fetchAndCacheEvents() {
         .where('startTime', '>=', now)
         .orderBy('startTime', 'asc')
         .get();
-
     const events = snap.docs.map(d => ({ id: d.id, ...d.data() }));
     localStorage.setItem('cachedEvents', JSON.stringify({
         ts: Date.now(),
