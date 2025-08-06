@@ -38,4 +38,4 @@ document.addEventListener('DOMContentLoaded', () => {
     );
 
     els.forEach(el => obs.observe(el));
-});
+}); 

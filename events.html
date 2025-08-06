@@ -24,28 +24,28 @@
     <main class="flex-grow-1">
         <div class="container py-5">
             <div class="container-fluid fade-in-element px-5">
-                <h1 class="text-center mb-4 fade-in-element">ABOUT US</h1>
+                <h1 class="text-center mb-4 fade-in-element">UPCOMING EVENTS</h1>
             </div>
-            <table class="table table-hover fade-in-element" id="events-table">
-                <thead class="table-dark">
-                    <tr class="fade-in-element">
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Location</th>
-                        <th>Start Time</th>
-                        <th>End Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-hover fade-in-element" id="events-table" style="max-width: 1200px;">
+                    <thead class="table-dark">
+                        <tr class="fade-in-element">
+                            <th>Title</th>
+                            <th>Description</th>
+                            <th>Location</th>
+                            <th>Start Time</th>
+                            <th>End Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
 
     <div id="footer-placeholder" style="flex:0 0 auto;"></div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/script.js"></script>
     <script>
         const firebaseConfig = {
             apiKey: "AIzaSyDZVoZMsL5tRMKlR3Y2m68PCilZqOiLYdw",
@@ -65,13 +65,14 @@
 
             try {
                 const snapshot = await db.collection('events')
-                    .where('startTime', '>=', now)       // only future (or ongoing) events
+                    .where('startTime', '>=', now)
                     .orderBy('startTime', 'asc')
                     .get();
 
                 snapshot.forEach(doc => {
                     const { title, description, location, startTime, endTime } = doc.data();
                     const tr = document.createElement('tr');
+                    tr.classList.add('fade-in-element');   // ← add the class here
                     tr.innerHTML = `
         <td>${title}</td>
         <td>${description}</td>
@@ -83,15 +84,32 @@
                 });
 
                 if (snapshot.empty) {
-                    tbody.innerHTML = `<tr><td colspan="5" class="text-center">No upcoming events.</td></tr>`;
+                    tbody.innerHTML = `<tr class="fade-in-element"><td colspan="5" class="text-center">No upcoming events.</td></tr>`;
                 }
             } catch (err) {
                 console.error('Error loading events:', err);
-                tbody.innerHTML = `<tr><td colspan="5" class="text-danger text-center">Failed to load events.</td></tr>`;
+                tbody.innerHTML = `<tr class="fade-in-element"><td colspan="5" class="text-danger text-center">Failed to load events.</td></tr>`;
             }
+
+            // table lazy loading
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.fade-in-element').forEach(el => {
+                observer.observe(el);
+            });
         });
 
+
     </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>
