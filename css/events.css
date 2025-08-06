@@ -9,7 +9,6 @@ h1 {
     color: #0A4B65;
 }
 
-/* center & contain */
 #events-table {
     margin: 0 auto;
     width: 100%;
@@ -22,7 +21,6 @@ h1 {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-/* header gradient + text styling */
 #events-table thead th {
     background: linear-gradient(90deg, #0A4B65, #145374);
     color: #fff;
@@ -33,7 +31,6 @@ h1 {
     border: none;
 }
 
-/* row striping + hover */
 #events-table tbody tr {
     transition: background 0.3s;
 }
@@ -46,14 +43,14 @@ h1 {
     background: #e2eff7;
 }
 
-/* cell padding & alignment */
 #events-table td {
     padding: 0.75rem 1rem;
     vertical-align: middle;
     border-top: 1px solid #dee2e6;
 }
 
-/* responsive wrapper (optional) */
 .table-responsive {
     margin-top: 1.5rem;
+    margin-top: 1.5rem;
+    overflow-y: hidden;
 }
