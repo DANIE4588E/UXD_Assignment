@@ -1,35 +1,44 @@
 fetch('header.html')
     .then(r => r.text())
     .then(html => {
+        // Inject header
         document.getElementById('header-placeholder').innerHTML = html;
 
-        // 1. Get raw pathname (e.g. "/signup/" or "/signup.html")
-        let raw = window.location.pathname;
+        // Grab all links in the injected header
+        const links = document.querySelectorAll('#header-placeholder a');
 
-        // 2. Strip leading & trailing slashes
-        let clean = raw.replace(/^\/|\/$/g, '');  // "signup" or "signup.html" or ""
+        // 1. Normalize the current path into "something.html"
+        //    - strip trailing slash, default "/" → "index.html"
+        let rawPath = window.location.pathname.replace(/\/$/, '');  // "/signup" or ""
+        let currentFile = rawPath
+            ? rawPath.replace(/^\//, '')                                // drop leading slash
+            : 'index.html';
+        if (!currentFile.endsWith('.html')) {
+            currentFile += '.html';
+        }
 
-        // 3. Default home to "index.html"
-        if (clean === '') clean = 'index.html';
+        // 2. Loop through each <a> and normalize its href the same way
+        links.forEach(link => {
+            const url = new URL(link.getAttribute('href'), location.origin);
+            let linkPath = url.pathname.replace(/\/$/, '');            // "/signup" or ""
+            let linkFile = linkPath
+                ? linkPath.replace(/^\//, '')                            // "signup"
+                : 'index.html';
+            if (!linkFile.endsWith('.html')) {
+                linkFile += '.html';
+            }
 
-        // 4. Ensure .html extension
-        const currentFile = clean.endsWith('.html') ? clean : `${clean}.html`;
-
-        // 5. Loop links
-        document.querySelectorAll('#header-placeholder a').forEach(link => {
-            let href = link.getAttribute('href');     // e.g. "signup.html" or "/signup.html"
-            // normalize href too:
-            href = href.replace(/^\/|\/$/g, '');      // strip slashes
-            if (!href.endsWith('.html')) href = `${href}.html`;
-
-            if (href === currentFile) {
+            // 3. Compare and toggle "active"
+            if (linkFile === currentFile) {
                 link.classList.add('active');
                 link.addEventListener('click', e => e.preventDefault());
             } else {
                 link.classList.remove('active');
             }
         });
-    });
+    })
+    .catch(err => console.error('Error loading header:', err));
+
 
 
 fetch('footer.html')
