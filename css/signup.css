@@ -82,3 +82,8 @@
 .form-control::placeholder {
     color: rgba(51, 51, 51, 0.7);
 }
+
+.form-title {
+    font-weight: bold;
+    color: #0A4B65;
+}
