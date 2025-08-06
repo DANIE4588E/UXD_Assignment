@@ -3,21 +3,24 @@ fetch('header.html')
     .then(html => {
         document.getElementById('header-placeholder').innerHTML = html;
 
-        const currentPath = window.location.pathname.split("/").pop();
-        const links = document.querySelectorAll('#header-placeholder a');
+        // strip trailing slash ("/about/" → "/about"), default "/" → "/index.html"
+        let pathname = window.location.pathname.replace(/\/$/, '') || '/';
+        if (pathname === '/') pathname = '/index.html';
 
-        const path = window.location.pathname;
-        const page = path.split('/').pop();
+        document
+            .querySelectorAll('#header-placeholder a')
+            .forEach(link => {
+                // make link.href absolute and strip origin
+                let linkPath = new URL(link.href, location.origin).pathname;
+                linkPath = linkPath.replace(/\/$/, '') || '/index.html';
 
-        links.forEach(link => {
-            const linkPath = link.getAttribute('href');
-            if (linkPath === currentPath || linkPath === page) {
-                link.classList.add('active');
-                link.addEventListener('click', e => e.preventDefault());
-            } else {
-                link.classList.remove('active');
-            }
-        });
+                if (linkPath === pathname) {
+                    link.classList.add('active');
+                    link.addEventListener('click', e => e.preventDefault());
+                } else {
+                    link.classList.remove('active');
+                }
+            });
     });
 
 fetch('footer.html')
