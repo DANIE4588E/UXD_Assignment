@@ -57,7 +57,7 @@
 
 .btn-secondary:active {
     background-color: rgb(158, 158, 158) !important;
-    color: #0A4B65 !important;
+    color: oklch(38.831% 0.07418 231.503) !important;
     border-color: #0A4B65 !important;
     transform: scale(0.9);
 }
@@ -70,7 +70,14 @@
     width: 100%;
     height: 250px;
     object-fit: cover;
+    transition: all 0.3s ease;
 }
+
+.training-img:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
 
 #events-container .card {
     border: 1px solid #e9ecef;
