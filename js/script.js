@@ -37,20 +37,64 @@ fetch('footer.html')
     });
 
 document.addEventListener('DOMContentLoaded', () => {
-    const els = document.querySelectorAll('.fade-in-element');
-    const obs = new IntersectionObserver(
-        (entries, observer) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('visible');
-                    observer.unobserve(e.target);
-                }
-            });
-        },
-        { threshold: 0.1 }
-    );
-    els.forEach(el => obs.observe(el));
+    const SELECTOR = '.fade-in-element, .fade-in-element-u, .fade-in-element-d, .fade-in-element-l, .fade-in-element-r';
+
+    const normalizeDelay = val => {
+        if (!val && val !== 0) return '0s';
+        let s = String(val).trim();
+
+        // Allow underscores for decimals in class names
+        s = s.replace(/_/g, '.');
+
+        if (/\d\s*(ms|s)$/i.test(s)) {
+            return s.toLowerCase();
+        }
+
+        const n = parseFloat(s);
+        return isNaN(n) ? '0s' : `${n}s`;
+    };
+
+    const delayFromClasses = el => {
+        const cls = Array.from(el.classList).find(c => /^delay-\d+(_\d+)?(ms|s)?$/i.test(c));
+        if (!cls) return null;
+
+        // Extract the part after 'delay-'
+        const raw = cls.slice(6);
+        return normalizeDelay(raw);
+    };
+
+    const delayFromDataAttr = el => {
+        const val = el.getAttribute('data-delay');
+        return val != null ? normalizeDelay(val) : null;
+    };
+
+    const getDelay = el => {
+        // data-delay > class
+        return delayFromDataAttr(el) || delayFromClasses(el) || '0s';
+    };
+
+    const targets = document.querySelectorAll(SELECTOR);
+
+    const obs = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+
+            const el = entry.target;
+
+            el.style.transitionDelay = getDelay(el);
+
+            el.classList.add('visible');
+            observer.unobserve(el);
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -5% 0px'
+    });
+
+    targets.forEach(el => obs.observe(el));
 });
+
+
 
 // Firebase
 const firebaseConfig = {
