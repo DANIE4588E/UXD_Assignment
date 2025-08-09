@@ -68,7 +68,6 @@ body {
     will-change: opacity, transform;
 }
 
-/* rem offset and show */
 .fade-in-element.visible,
 .fade-in-element-u.visible,
 .fade-in-element-d.visible,
@@ -78,7 +77,6 @@ body {
     transform: none;
 }
 
-/* respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
 
     .fade-in-element,

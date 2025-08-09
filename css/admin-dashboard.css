@@ -1,0 +1,84 @@
+/* Keep styling consistent; only minimal admin-specific tweaks */
+.table-actions {
+  white-space: nowrap;
+  display: flex;
+  gap: .5rem;
+}
+
+#applications-table th,
+#events-table th {
+  font-weight: 600;
+}
+
+h1 {
+  font-family: "Freshman", sans-serif;
+  color: #0A4B65;
+  font-size: 35px;
+}
+
+#about-text {
+  font-family: "Varela";
+  color: #0A4B65;
+}
+
+table {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 1200px;
+  border-collapse: separate;
+  border-spacing: 0;
+  background: #fff;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+thead th {
+  background: linear-gradient(90deg, #0A4B65, #145374);
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 1rem;
+  border: none;
+}
+
+tbody tr {
+  transition: background 0.3s;
+}
+
+tbody tr:nth-child(odd) {
+  background: #f8f9fa;
+}
+
+tbody tr:hover {
+  background: #e2eff7;
+}
+
+td {
+  padding: 0.75rem 1rem;
+  vertical-align: middle;
+  border-top: 1px solid #dee2e6;
+}
+
+.table-responsive {
+  margin-top: 1.5rem;
+  margin-top: 1.5rem;
+  overflow-y: hidden;
+}
+
+.bi {
+  color: inherit;
+  width: auto;
+  height: auto;
+  background: none;
+  border-radius: 0;
+  display: inline;
+  justify-content: initial;
+  align-items: initial;
+}
+
+.bi:hover {
+  background: none;
+  color: inherit;
+}

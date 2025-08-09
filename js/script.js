@@ -1,5 +1,3 @@
-// js/script.js
-
 fetch('header.html')
     .then(r => r.text())
     .then(html => {
@@ -43,7 +41,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!val && val !== 0) return '0s';
         let s = String(val).trim();
 
-        // Allow underscores for decimals in class names
         s = s.replace(/_/g, '.');
 
         if (/\d\s*(ms|s)$/i.test(s)) {
@@ -58,7 +55,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cls = Array.from(el.classList).find(c => /^delay-\d+(_\d+)?(ms|s)?$/i.test(c));
         if (!cls) return null;
 
-        // Extract the part after 'delay-'
+        // Extract after delay-
         const raw = cls.slice(6);
         return normalizeDelay(raw);
     };
