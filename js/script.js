@@ -122,7 +122,7 @@ async function fetchAndCacheEvents() {
 
 window.addEventListener('DOMContentLoaded', () => {
     const item = JSON.parse(localStorage.getItem('cachedEvents') || 'null');
-    if (!item || Date.now() - item.ts > 5 * 60e3) {
+    if (!item || Date.now() - item.ts > 0.1 * 60e3) {
         fetchAndCacheEvents().catch(console.error);
     }
 });
