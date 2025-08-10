@@ -88,7 +88,7 @@
             const statusHost = document.getElementById('statusCard');
             const originalBtnHTML = submitBtn.innerHTML;
 
-            function mountStatus({ type, title, message, primaryText, onPrimary }) {
+            function mountStatus({ type, title, message, primaryText, onPrimary, name, email, phone, experience, comment }) {
                 const icon =
                     type === 'success'
                         ? `
@@ -104,18 +104,27 @@
 </svg>`;
 
                 statusHost.innerHTML = `
-      <div class="result-card fade-in-element visible">
-        ${icon}
-        <h3 class="mb-1">${title}</h3>
-        <p class="mb-3">${message}</p>
-        <div class="d-flex gap-2 justify-content-center">
-          <button id="primaryAction" class="btn ${type === 'success' ? 'btn-success' : 'btn-danger'}">
-            ${primaryText}
-          </button>
-          <button id="backToForm" class="btn btn-outline-secondary">Back to form</button>
-        </div>
-      </div>
-    `;
+  <div class="result-card fade-in-element visible p-3 rounded shadow-sm text-center">
+    ${icon}
+    <h3 class="mb-1">${title}</h3>
+    <p class="mb-3">${message}</p>
+    <h5 class="mb-2">Form Details</h5>
+    <ul class="list-group list-group-flush mb-3 text-start mx-auto" style="max-width: 400px;">
+      <li class="list-group-item"><strong>Name:</strong> ${name}</li>
+      <li class="list-group-item"><strong>Email:</strong> ${email}</li>
+      <li class="list-group-item"><strong>Phone:</strong> ${phone}</li>
+      <li class="list-group-item"><strong>Experience:</strong> ${experience}</li>
+      <li class="list-group-item"><strong>Comment:</strong> ${comment}</li>
+    </ul>
+    <div class="d-flex gap-2 justify-content-center">
+      <button id="primaryAction" class="btn ${type === 'success' ? 'btn-success' : 'btn-danger'}">
+        ${primaryText}
+      </button>
+      <button id="backToForm" class="btn btn-outline-secondary">Back to form</button>
+    </div>
+  </div>
+`;
+
 
                 statusHost.classList.remove('d-none');
                 form.classList.add('d-none');
@@ -149,7 +158,12 @@
                             statusHost.classList.add('d-none');
                             form.classList.remove('d-none');
                             document.getElementById('name').focus();
-                        }
+                        },
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        experience: experience,
+                        comment: comment
                     });
                     return;
                 }
@@ -182,7 +196,12 @@
                             statusHost.classList.add('d-none');
                             form.classList.remove('d-none');
                             document.getElementById('name').focus();
-                        }
+                        },
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        experience: experience,
+                        comment: comment
                     });
 
                 } catch (err) {
@@ -196,7 +215,12 @@
                         onPrimary: async () => {
                             statusHost.classList.add('d-none');
                             form.classList.remove('d-none');
-                        }
+                        },
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        experience: experience,
+                        comment: comment
                     });
                 } finally {
                     submitBtn.disabled = false;
